@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createSlice
  } from '@reduxjs/toolkit'
-} from "../../app/types"
+
 import {
     fetchUsers,
     fetchUser,
@@ -11,7 +11,7 @@ import {
     registerUser,
     updateUser,
     delUser,
-} from "./userAPI"
+} from "./usersApi"
 const initialState= {
   user:null,
   users:null,
@@ -37,7 +37,9 @@ export const logUser =createAsyncThunk(
     async (payload, thunkAPI) =>{
     const data = await loginUser(payload)
    
-        localStorage.setItem("quiz-app-user",JSON.stringify(data))
+        localStorage.setItem("appt-app-user",JSON.stringify(data))
+        alert(payload.email)
+        alert(data.email)
         return data
 })
 
