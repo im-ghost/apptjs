@@ -7,7 +7,7 @@ async function request(
   return await response.json();
 }
  export const api = {
-  get: (url:,token) => 
+  get: (url,token) => 
   	request(url,{
   	  headers:{
   	    authorization:token
