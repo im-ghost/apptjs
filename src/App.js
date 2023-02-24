@@ -4,6 +4,7 @@ import './App.css';
 
 import Logout from "./Components/Logout"
 import Header from "./Components/Header"
+import Signin from "./pages/auth/Signin"
 import {
   createBrowserRouter,
   RouterProvider,
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
     element: <Logout/>,
     errorElement: ErrorPage
   },
-  /*{
+  {
     path: "/signin",
     element: <Signin/>,
     errorElement: ErrorPage
-  },
+  },/*
   {
     path: "/signup",
     element: <signup/>,
