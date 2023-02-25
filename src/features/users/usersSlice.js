@@ -10,10 +10,18 @@ import {
    deleteUser,
    logUser,
    regUser,
-   putUser
+   putUser,
+   getDoctors
 } from "./usersApi"
+const getUsr = () =>{
+  const user = localStorage.getItem("appt-app-user");
+  if(user !== null){
+    return user
+  }
+  return null
+}
 const initialState= {
-  user:null,
+  user:  getUsr(),
   users:null,
   userById:null,
   loading: 'idle',
@@ -32,9 +40,7 @@ const fetchUserById = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {/*
-     state,action)
-    },*/
+  reducers: {
   },
   extraReducers: (builder) => {
     builder
@@ -44,20 +50,46 @@ export const userSlice = createSlice({
         }
       })
       .addCase(logUser.fulfilled, (state, action) => {
-        console.log(state.loading)
         const { payload } = action;
         state.isSuccessful = true
-
         if (
           state.loading === 'pending'
         ) {
           state.loading = 'idle'
-          state.user.user = payload
-          alert("ttt"+state.user.user)
+          state.user = payload
+          alert("ttt"+state.user)
+          
         }
       })
       .addCase(logUser.rejected, (state, action) => {
         const { error } = action
+//alert(Object.values(error)):
+        if (
+          state.loading === 'pending'
+        ) {
+          state.loading = 'idle'
+          state.error = error
+        }
+      })
+    .addCase(getDoctors.pending, (state, action) => {
+        if (state.loading === 'idle') {
+          state.loading = 'pending'
+        }
+      })
+      .addCase(getDoctors.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.isSuccessful = true
+        if (
+          state.loading === 'pending'
+        ) {
+          state.loading = 'idle'
+          state.doctors = payload
+          
+        }
+      })
+      .addCase(getDoctors.rejected, (state, action) => {
+        const { error } = action
+//alert(Object.values(error)):
         if (
           state.loading === 'pending'
         ) {
@@ -201,4 +233,5 @@ export {
    regUser,
    putUser
 }
+export const selectUser = (state) => state.users.user;
 export default userSlice.reducer
