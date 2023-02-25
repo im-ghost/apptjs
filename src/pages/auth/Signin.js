@@ -38,9 +38,9 @@ const Signin =()=>{
 // alert("38")
   useEffect(() => {
     if (error) {
-      alert(error)
-      alert("error")
-      setError(err.message)
+    //  alert(Object.values(error))
+      //alert(error.message)
+      setError(error.message)
     }
 
     if (isSuccess || user) {
@@ -48,8 +48,7 @@ const Signin =()=>{
     }
 
     //dispatch(reset())
-  }, [error, isSuccess])
-  // alert("50")
+  }, [error, isSuccess,user,dispatch])
   const login = async (e)=>{
     e.preventDefault();
    const data = {
@@ -57,13 +56,7 @@ const Signin =()=>{
      password:state.password
    }
    await dispatch(logUser(data))
-   /* .unwrap()
-    .then((originalPromiseResult) => {
-      navigate("/")
-    })
-    .catch((rejectedValueOrSerializedError) => {
-      setError(`${rejectedValueOrSerializedError.name} : ${rejectedValueOrSerializedError.message === "Failed to fetch" ? "Server error" : rejectedValueOrSerializedError.message }`)
-    })*/
+   
    
   } 
   //alert("67")

@@ -35,7 +35,9 @@ const Signup =({})=>{
     name:"",
     email:"",
     password:"",
-    password2:""
+    password2:"",
+    isDoctor:false,
+    specialties:[]
   }
   
 
@@ -45,9 +47,8 @@ const Signup =({})=>{
 // alert("38")
   useEffect(() => {
     if (error) {
-      alert(error)
-      alert("error")
-      setError(err.message)
+
+      setError(error.message)
     }
 
     if (isSuccess || user) {
@@ -62,7 +63,9 @@ const Signup =({})=>{
    const data = {
      name:state.name,
      email:state.email,
-     password:state.password
+     password:state.password,
+     isDoctor:state.isDoctor,
+     specialties:state.specialties
    }
    await dispatch(regUser(data))
   
@@ -92,6 +95,18 @@ const Signup =({})=>{
         return {
           ...state,
           password2:action.payload
+        }
+        break;
+      case 'setDoctor':
+        return {
+          ...state,
+          isDoctor:action.payload
+        }
+        break;
+      case 'setSpecialties':
+        return {
+          ...state,
+          specialties:[action.payload]
         }
         break;
       case 'reset':
@@ -193,6 +208,40 @@ const Signup =({})=>{
      onChange:(e)=>{
        setState({
        type:"setPassword2",
+       payload:e.target.value
+       })
+     },
+    
+     }}
+     />
+    <TextField
+    id="isDoctor"
+    label="Are you a doctor?"
+    placeholder="Are you a doctor?"
+    className="signin__form--input" 
+     InputProps={{
+     value:state.isDoctor,
+     type:"checkbox",
+     onChange:(e)=>{
+       setState({
+       type:"setDoctor",
+       payload:e.target.value
+       })
+     },
+    
+     }}
+     />
+    <TextField
+    id="specialties"
+    label="specialties"
+    placeholder="What are your specialties"
+    className="signin__form--input" 
+     InputProps={{
+     value:state.specialties,
+     type:"text",
+     onChange:(e)=>{
+       setState({
+       type:"setSpecialties",
        payload:e.target.value
        })
      },
