@@ -18,11 +18,26 @@ export const getUsers =createAsyncThunk(
     
 })
 
+export const getDoctors =createAsyncThunk(
+    'users/getUsers',
+    async (state, thunkAPI) => {
+      try {
+        const users = axios.get(`${BASE_URL}/users`);
+        const doctors =users.filter(user=> user.isDoctor)
+      } catch (e) {
+        throw new Error(e.error)
+      }
+    
+})
+
 export const logUser =createAsyncThunk(
     'users/logUser',
     async (payload, thunkAPI) =>{
       try {
-        const user = await axios.post(`${BASE_URL}/users/user/login`,payload)
+        const { data }  = await axios.post(`${BASE_URL}/users/user/login`,payload)
+
+
+        return data
       } catch (e) {
     
         throw new Error(e.message)
@@ -33,13 +48,13 @@ export const regUser =createAsyncThunk(
     'users/regUser',
     async (payload, thunkAPI) => {
         try {
-        const user = await axios.post(`${BASE_URL}/users/`,payload)
-        if(user){
-          localStorage.setItem("appt-app-user",JSON.stringify(user))
-          return user
+        const { data } = await axios.post(`${BASE_URL}/users/`,payload)
+        if(data){
+          localStorage.setItem("appt-app-user",JSON.stringify(data))
+          return data
         }
       } catch (e) {
-    
+        //alert(Object.values(e))
         throw new Error(e.message)
       }
 })
@@ -69,4 +84,3 @@ export const getUser = createAsyncThunk(
       return "data"
     //return fetchUser(payload)
 })
-
