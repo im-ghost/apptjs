@@ -4,7 +4,8 @@ import React,{
   useState,
 } from "react"
 import { 
-  useDispatch
+  useDispatch,
+  useSelector
  } from "react-redux"
 import  {
   useNavigate
@@ -23,33 +24,49 @@ import { logUser } from "../../features/users/usersSlice"
 
 
 const Signin =()=>{
-  const [error,setError] = useState("")
+  const [err,setError] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  //alert("30")
   const initialState={
     email:"",
     password:""
   }
+  const { user, loading, error, isSuccess,  } = useSelector(
+    (state) => state.users
+  )
+// alert("38")
+  useEffect(() => {
+    if (error) {
+      alert(error)
+      alert("error")
+      setError(err.message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    //dispatch(reset())
+  }, [error, isSuccess])
+  // alert("50")
   const login = async (e)=>{
     e.preventDefault();
    const data = {
      email:state.email,
      password:state.password
    }
-
-
-
-
    await dispatch(logUser(data))
-    .unwrap()
+   /* .unwrap()
     .then((originalPromiseResult) => {
       navigate("/")
     })
     .catch((rejectedValueOrSerializedError) => {
       setError(`${rejectedValueOrSerializedError.name} : ${rejectedValueOrSerializedError.message === "Failed to fetch" ? "Server error" : rejectedValueOrSerializedError.message }`)
-    })
+    })*/
    
   } 
+  //alert("67")
   const reducer = (state,action) =>{
     switch (action.type) {
       case 'setEmail':
@@ -79,14 +96,14 @@ const Signin =()=>{
   return(
     <div className="bg-blue-900 text-center flex flex-col justify-center  h-screen w-screen rounded-2xl border-none shadow-3xl">
     <Box className="text-ryan-900">
-    <Typography variant="h4">
+    <Typography variant="h2">
     Let's sign you in
     </Typography>
-    <Typography variant="h5">
+    <Typography variant="h3">
     Welcome back,we have missed you
     </Typography>
     <Typography variant="h6" className="bg-red-900 italics">
-    {error}
+    {err}
     </Typography>
     </Box>
    <Box
@@ -134,7 +151,7 @@ const Signin =()=>{
      }}
      />
     <Button type='submit' onClick={login} className="bg-blue-100 rounded-2xl" variant="contained">
-     <Typography variant="h6">
+     <Typography variant="h4">
      Sign In
      </Typography>
      </Button>
