@@ -5,19 +5,20 @@ import {
  } from '@reduxjs/toolkit'
 
 import {
-    fetchUsers,
-    fetchUser,
-    loginUser,
-    registerUser,
-    updateUser,
-    delUser,
+   getUsers,
+   getUser,
+   deleteUser,
+   logUser,
+   regUser,
+   putUser
 } from "./usersApi"
 const initialState= {
   user:null,
   users:null,
   userById:null,
   loading: 'idle',
-  error:null
+  error:null,
+  isSuccessful :false
 }/*
 const fetchUserById = createAsyncThunk(
     'users/fetchByIdStatus',
@@ -26,56 +27,7 @@ const fetchUserById = createAsyncThunk(
       return response.data
     }
   )*/
-export const getUsers =createAsyncThunk(
-    'users/getUsers',
-    async (state, thunkAPI) => {
-    return fetchUsers()
-})
-
-export const logUser =createAsyncThunk(
-    'users/logUser',
-    async (payload, thunkAPI) =>{
-    const data = await loginUser(payload)
-   
-        localStorage.setItem("appt-app-user",JSON.stringify(data))
-        alert(payload.email)
-        alert(data.email)
-        return data
-})
-
-export const regUser =createAsyncThunk(
-    'users/regUser',
-    async (payload, thunkAPI) => {
-    const data = await registerUser(payload)
-        localStorage.setItem("quiz-app-user",JSON.stringify(data))
-        return data
-    
-})
-
-export const deleteUser =createAsyncThunk(
-    'users/deleteUser',
-    async (payload, thunkAPI) => {
-    const data = await delUser(payload)
-        localStorage.removeItem("quiz-app-user")
-        return data
-})
-
-export const putUser =createAsyncThunk(
-    'users/putUser',
-    async (payload, thunkAPI) => {
-        console.log(payload)
-    const data = await updateUser(payload)
-        localStorage.setItem("quiz-app-user",JSON.stringify(data))
-        return data
-})
-
-export const getUser = createAsyncThunk(
-    'users/getUser',
-    async (payload, thunkAPI) => { 
-    return fetchUser(payload)
-})
-
-
+  
 
 export const userSlice = createSlice({
   name: 'user',
@@ -93,14 +45,15 @@ export const userSlice = createSlice({
       })
       .addCase(logUser.fulfilled, (state, action) => {
         console.log(state.loading)
-        const { payload } = action
+        const { payload } = action;
+        state.isSuccessful = true
 
         if (
           state.loading === 'pending'
         ) {
           state.loading = 'idle'
-          state.user = payload
-          console.log("ttt"+state.user)
+          state.user.user = payload
+          alert("ttt"+state.user.user)
         }
       })
       .addCase(logUser.rejected, (state, action) => {
@@ -215,7 +168,9 @@ export const userSlice = createSlice({
           state.loading === 'pending'
         ) {
           state.loading = 'idle'
-          state.user = payload
+        //  alert("slice")
+          state.user = payload;
+          state.isSuccessful=true
         }
       })
       .addCase(regUser.rejected, (state, action) => {
@@ -238,5 +193,12 @@ export const {
       signup,
       signin
      } = userSlice.*/
-
+export {
+  getUsers,
+   getUser,
+   deleteUser,
+   logUser,
+   regUser,
+   putUser
+}
 export default userSlice.reducer
