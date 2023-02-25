@@ -5,6 +5,7 @@ import './App.css';
 import Logout from "./Components/Logout"
 import Header from "./Components/Header"
 import Signin from "./pages/auth/Signin"
+import Signup from "./pages/auth/Signup"
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,12 +21,12 @@ const router = createBrowserRouter([
     path: "/signin",
     element: <Signin/>,
     errorElement: ErrorPage
-  },/*
+  },
   {
     path: "/signup",
-    element: <signup/>,
+    element: <Signup/>,
     errorElement: ErrorPage
-  },
+  },/*
   {
     path: "/",
     element: <Home />,
