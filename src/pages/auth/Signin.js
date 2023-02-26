@@ -12,10 +12,7 @@ import  {
 } from "react-router-dom"
 import {
   Typography,
-  Card,
-  Select,
   TextField,
-  MenuItem,
   Box,
   Button
 } from "@mui/material";
@@ -32,7 +29,7 @@ const Signin =()=>{
     email:"",
     password:""
   }
-  const { user, loading, error, isSuccess,  } = useSelector(
+  const { user, error, isSuccess,  } = useSelector(
     (state) => state.users
   )
 // alert("38")
@@ -48,7 +45,7 @@ const Signin =()=>{
     }
 
     //dispatch(reset())
-  }, [error, isSuccess,user,dispatch])
+  }, [navigate,error, isSuccess,user,dispatch])
   const login = async (e)=>{
     e.preventDefault();
    const data = {

@@ -17,10 +17,7 @@ import {
  } from "react-redux"
 import {
   Typography,
-  Card,
-  Select,
   TextField,
-  MenuItem,
   Box,
   Button
   
@@ -41,7 +38,7 @@ const Signup =({})=>{
   }
   
 
-  const { user, loading, error, isSuccess,  } = useSelector(
+  const { user, error, isSuccess,  } = useSelector(
     (state) => state.users
   )
 // alert("38")
@@ -56,7 +53,7 @@ const Signup =({})=>{
     }
 
     //dispatch(reset())
-  }, [error, isSuccess,user])
+  }, [navigate,error, isSuccess,user])
   // alert("50")
   const create = async (e)=>{
     e.preventDefault();
@@ -133,6 +130,9 @@ const Signup =({})=>{
    
     <Typography variant='h3'>
     let's sign you up
+    </Typography>
+    <Typography variant='h3' className="bg-red-900">
+    {err}
     </Typography>
       <Box
       component="form"
