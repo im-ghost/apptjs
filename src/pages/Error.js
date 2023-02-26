@@ -2,7 +2,7 @@ import {
   useRouteError,
   Link
  } from "react-router-dom";
-import { Card,Paper, Typography} from "@mui/material"
+import { Paper, Typography} from "@mui/material"
 export default function ErrorPage() {
   const error = useRouteError();
   console.error(error);
