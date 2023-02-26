@@ -3,28 +3,35 @@ import {
   useDispatch
 } from "react-redux";
 import {
-  Paper,
   Typography ,
   Box
 } from "@mui/material";
 import {
   useEffect,
-  useState
+  useState,
+  useLayoutEffect
 } from "react";
 import {
-  useNavigator,
-  Link,
-  BrowserRouter as Router
+  useNavigate,
+  /*Link,
+  BrowserRouter as Router*/
 } from "react-router-dom"
-
+import {
+  getDoctors
+} from "../features/users/usersSlice"
 import Search from "../Components/Search"
+import Doctors from "../Components/Doctors"
+import Specialties from "../Components/Specialties"
 
 const Home = () =>{
   const [name,setName] = useState(null)
   const [greeting,setGreeting] = useState("")
+  const [err,setError]= useState(null)
+  const [docs,setDoctors] = useState([])
+  const [specialties,setSpecialities] = useState([])
   const dispatch = useDispatch();
-  const navigate = useNavigator();
-  const { user } = useSelector((state)=>state.users)
+  const navigate = useNavigate();
+  const { user,doctors , error , isSuccessful } = useSelector((state)=>state.users)
   const great = (name) =>{
     const hours = new Date().getHours();
     if(hours > 0 && hours < 12){
@@ -35,7 +42,9 @@ const Home = () =>{
       return `Good evening ${name},hope you had a great day?`
     }
   }
-  
+  useLayoutEffect(()=>{
+    dispatch(getDoctors())
+  },[dispatch])
   useEffect(()=>{
     if(user.name){
       setName(user.name.split()[1])
@@ -43,7 +52,24 @@ const Home = () =>{
     }else if(!user){
       navigate("/authenticate")
     }
-  },[user])
+  },[user,name, navigate])
+  useEffect(()=>{
+    if(doctors){
+      setDoctors(doctors);
+      const specs = []
+      for(var i=0;i<doctors.length;i++){
+        for(var j=0;j<doctors.specialties.length;j++){
+          if(!specs.contains(doctors.specialties[j])){
+            specs.push(doctors.specialties[j])
+          }
+        }
+      }
+      setSpecialities(specs)
+      if(error){
+        setError(error.message)
+      }
+    }
+  },[error,isSuccessful, doctors, dispatch])
   return(
     <div>
     <Box className="">
@@ -53,8 +79,13 @@ const Home = () =>{
     <Box className="">
       <Search />
     </Box>
-    
-    
+    <Box className="">
+      {docs.length > 0 ? <Doctors doctors={docs} /> : (<Typography variant="h3">No doctors available</Typography>)}
+    </Box>
+    <Box className="">
+      {specialties.length > 0 ? <Specialties specialties={specialties} /> : (<Typography variant="h3">No Specialty available</Typography>)}
+    </Box>
+    <Box className="">{err}</Box>
     
     
     
