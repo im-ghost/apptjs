@@ -1,6 +1,4 @@
 import { 
-  Paper , 
-  Card ,
   Typography
 } from "@mui/material";
 import {
@@ -11,7 +9,7 @@ import {
 
 const Footer = () =>{
   return (
-    <div className="rounded-3xl flex flex-row w-[80vw]  space-evenly  shadow-3xl absolute bottom-5 p-4 m-2">
+    <div className="rounded-3xl flex flex-row w-[80vw]  space-evenly  shadow-3xl absolute bottom-5 p-4 m-2 space-x-8 justify-items-stretch">
     <Router>
     <Typography variant="h4">
     <Link to={`/`}>
