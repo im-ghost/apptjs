@@ -1,7 +1,6 @@
 import {
   createAsyncThunk
  } from '@reduxjs/toolkit'
-import { api } from "../../app/hooks";
 import axios from "axios"
 //import { useSelector } from "react-redux"
 const BASE_URL = "http://localhost:5000/api"
@@ -24,6 +23,7 @@ export const getDoctors =createAsyncThunk(
       try {
         const users = axios.get(`${BASE_URL}/users`);
         const doctors =users.filter(user=> user.isDoctor)
+        return doctors
       } catch (e) {
         throw new Error(e.error)
       }

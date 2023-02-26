@@ -1,6 +1,4 @@
 import {
-  /*combineReducers,*/
-  createAsyncThunk,
   createSlice
  } from '@reduxjs/toolkit'
 
@@ -172,7 +170,7 @@ export const userSlice = createSlice({
         }
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        const { payload } = action
+      //  const { payload } = action
         if (
           state.loading === 'pending'
         ) {
@@ -231,7 +229,8 @@ export {
    deleteUser,
    logUser,
    regUser,
-   putUser
+   putUser,
+   getDoctors
 }
 export const selectUser = (state) => state.users.user;
 export default userSlice.reducer
