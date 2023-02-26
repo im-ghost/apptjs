@@ -9,11 +9,15 @@ import {
 import {
   useParams
 } from "react-router-dom"
+import {
+  Typography
+  
+} from "@mui/material"
 import Doctors from "../Components/Doctors"
 import { getDoctors } from "../features/users/usersSlice"
 const SearchResults = () =>{
   const [results,setResults] = useState(null)
-  const [error,setError] = useState(null)
+  const [err,setError] = useState(null)
   const { search } = useParams();
   const dispatch = useDispatch();
   const {
@@ -23,7 +27,7 @@ const SearchResults = () =>{
   } = useSelector(state=>state.users)
   useEffect(()=>{
     dispatch(getDoctors)
-  },[])
+  },[dispatch])
   useEffect(()=>{
     if(error){
       setError(error.message)
@@ -33,10 +37,10 @@ const SearchResults = () =>{
     const docs = allDocs.filter(doc=>doc.specialities.contains(search))
       setResults(docs)
     }
-  },[dispatch,doctors,error,isSuccessful])
+  },[search,dispatch,doctors,error,isSuccessful])
   return(
     <div>
-       <Typography variant="h3">Search results for {search}</Typography>
+       <Typography variant="h3">Search results for {search} : {err}</Typography>
        {
          results?.length > 0 ? <Doctors doctor={results}/> : (<Typography variant="h5">No results found</Typography>)
        }
