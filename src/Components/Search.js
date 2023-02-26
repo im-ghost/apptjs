@@ -1,6 +1,7 @@
 import {
   TextField,
-  Button
+  Button,
+  Box
 } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
@@ -28,7 +29,7 @@ const Search = () =>{
      },
      }}
      />
-     <Button variant="contained" onClick{()=>{
+     <Button variant="contained" onClick={()=>{
        navigate(`search/${search}`)
      }}>🔍</Button>
     </Box>

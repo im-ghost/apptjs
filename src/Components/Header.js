@@ -1,14 +1,6 @@
 import {
-  Paper,
-  Card,
-  Typography,
-  Button
+  Paper
 } from "@mui/material"
-import {
-  useState,
-  useEffect,
-  useRef
-} from "react"
 
 const Header = () => {
   return (
