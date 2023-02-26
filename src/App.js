@@ -1,18 +1,18 @@
 // useLoaderData that where the id is
 // alao a redirect
 import './App.css';
-import { useEffect } from "react"
 import Logout from "./Components/Logout"
 import Header from "./Components/Header"
 //
 import SearchResults from "./pages/SearchResults"
-import Footer from "./Components/Footer"
+import Home from "./pages/Home"
+//import Footer from "./Components/Footer"
 import Signin from "./pages/auth/Signin"
 import Signup from "./pages/auth/Signup"
 import {
   createBrowserRouter,
   RouterProvider,
-  BrowserRouter as Router
+  //BrowserRouter as Router
 } from "react-router-dom";
 import ErrorPage from "./pages/Error"
 const router = createBrowserRouter([
@@ -55,12 +55,12 @@ const router = createBrowserRouter([
     path: "/appointments/id",
     element: <Appointment/>,
     errorElement: ErrorPage
-  },
+  },*/
   {
     path: "/",
-    element: <App/>,
+    element: <Home/>,
     errorElement: ErrorPage
-  },*/
+  },
 ]);
 
 function App() {
