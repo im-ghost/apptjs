@@ -1,29 +1,30 @@
 import {
-  BrowserRouter as Router,
-  Link
+  useNavigate
 } from "react-router-dom"
 import {
   Card,
   Typography
 } from "@mui/material"
 const Specialties = ({specialties})=>{
+  alert(specialties)
+  const navigate = useNavigate()
   return(
-   <>
+   <div>
    {
    specialties.map(spec =>
    ( <Card className="">
-   <Router>
+   
     <Typography variant="h5">
-   <Link to={`${spec._id}`}>
-     {spec.name}
-   </Link>
+   <div onClick={()=>navigate(`/specs/${spec}`)} className="bg-red-100 m-2 border-groove border border-4">
+     {spec}
+   </div>
     </Typography>
-   </Router>
+
    </Card>)
    )
      
    }
-   </>
+   </div>
     )
 }
 export default Specialties
