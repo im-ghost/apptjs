@@ -6,7 +6,9 @@ import React,{
   
 } from "react"
 import  {
-  useNavigate
+  useNavigate,
+  Link,
+  BrowserRouter as Router
 } from "react-router-dom"
 
 import { regUser } from "../../features/users/usersSlice"
@@ -254,6 +256,11 @@ const Signup =({})=>{
      Create
      </Typography>
      </Button>
+     <Typography variant="h6">
+     <Router>
+    Already a user? <Link to={`/signin`}>sign in</Link>
+     </Router>
+     </Typography>
     </Box>
     </div>
     )
