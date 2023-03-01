@@ -8,7 +8,9 @@ import {
   useSelector
  } from "react-redux"
 import  {
-  useNavigate
+  useNavigate,
+  Link,
+  BrowserRouter as Router
 } from "react-router-dom"
 import {
   Typography,
@@ -145,11 +147,9 @@ const Signin =()=>{
      Sign In
      </Typography>
      </Button>
-      <Typography variant="h6">
-     <Router>
-    Not yet a user? <Link to={`/signup`}>sign up</Link>
-     </Router>
-     </Typography>
+      <div onClick={()=>{ navigate("/signup")}}>
+         <Typography variant="h6">Don't have an Account yet?</Typography>
+      </div>
     </Box>
     </div>
     )

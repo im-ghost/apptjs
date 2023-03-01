@@ -256,11 +256,9 @@ const Signup =({})=>{
      Create
      </Typography>
      </Button>
-     <Typography variant="h6">
-     <Router>
-    Already a user? <Link to={`/signin`}>sign in</Link>
-     </Router>
-     </Typography>
+       <div onClick={()=>{ navigate("/signin")}}>
+         <Typography variant="h6">Already have an account? Sign In</Typography>
+      </div>
     </Box>
     </div>
     )
