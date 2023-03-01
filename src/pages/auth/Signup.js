@@ -50,7 +50,7 @@ const Signup =({})=>{
       setError(error.message)
     }
 
-    if (isSuccess || user) {
+    if (isSuccess) {
       navigate('/')
     }
 
@@ -99,7 +99,7 @@ const Signup =({})=>{
       case 'setDoctor':
         return {
           ...state,
-          isDoctor:action.payload
+          isDoctor:!state.isDoctor
         }
         break;
       case 'setSpecialties':
