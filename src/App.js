@@ -9,6 +9,7 @@ import Home from "./pages/Home"
 //import Footer from "./Components/Footer"
 import Signin from "./pages/auth/Signin"
 import Signup from "./pages/auth/Signup"
+import Authenticate from "./pages/Authenticate"
 import {
   createBrowserRouter,
   RouterProvider,
@@ -35,12 +36,12 @@ const router = createBrowserRouter([
     path: "/search/:search",
     element: <SearchResults />,
     errorElement: ErrorPage
-  },/*
-  {
-    path: "/doctors",
-    element: <Doctors />,
-    errorElement: ErrorPage
   },
+  {
+    path: "/authenticate",
+    element: <Authenticate />,
+    errorElement: ErrorPage
+  },/*
   {
     path: "/doctors/id",
     element: <Doctor/>,
