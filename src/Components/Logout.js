@@ -23,7 +23,8 @@ const Logout = () =>{
     alert("cancelled")
   }
   return(
-    logOut && (<Paper raised={true}>
+    <>
+   { logOut ? (<Paper raised={true}>
       <Typography variant="h3">
       Are you sure you want to sign out?
       </Typography>
@@ -31,7 +32,8 @@ const Logout = () =>{
        <Button onClick={logout}>Yes</Button>
        <Button onClick={cancel}>No</Button>
       </div>
-    </Paper>)
+    </Paper>) : ""}
+    </>
     )
 }
 
