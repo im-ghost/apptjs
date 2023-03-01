@@ -145,6 +145,11 @@ const Signin =()=>{
      Sign In
      </Typography>
      </Button>
+      <Typography variant="h6">
+     <Router>
+    Not yet a user? <Link to={`/signup`}>sign up</Link>
+     </Router>
+     </Typography>
     </Box>
     </div>
     )
