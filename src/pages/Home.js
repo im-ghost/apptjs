@@ -27,7 +27,7 @@ const Home = () =>{
   const [name,setName] = useState("")
   const [greeting,setGreeting] = useState("")
   const [err,setError]= useState("")
-  const [docs,setDoctors] = useState([])
+  const [docs,setDocs] = useState([])
   const [specialties,setSpecialities] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,31 +43,43 @@ const Home = () =>{
     }
   }
   useLayoutEffect(()=>{
+  
     dispatch(getDoctors())
   },[dispatch])
   useEffect(()=>{
     if(user !== null){
-      setName(user.name.split()[1])
+      
+      setName(user.name.split(" ")[1])
       setGreeting(great(name))
     }else{
      navigate("/authenticate")
     }
   },[user,name, navigate])
   useEffect(()=>{
-    if(doctors){
-      setDoctors(doctors);
+    if(doctors.length > 0){
+      setDocs(doctors)
+      
       const specs = []
       for(var i=0;i<doctors.length;i++){
-        for(var j=0;j<doctors.specialties.length;j++){
-          if(!specs.contains(doctors.specialties[j])){
-            specs.push(doctors.specialties[j])
+          
+         
+        for(var j=0;j<doctors[i].specialties.length;j++){
+        
+           let spec = doctors[i].specialties[j].split(",")
+       for(var h= 0; h< spec.length;h++){
+          if(!specs.includes(spec[h])){
+            specs.push(spec[h])
           }
+       }
         }
       }
+      
       setSpecialities(specs)
+      
       if(error){
         setError(error.message)
       }
+    alert(specs)
     }
   },[error,isSuccessful, doctors, dispatch])
   return(
