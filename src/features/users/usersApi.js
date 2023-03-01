@@ -9,7 +9,7 @@ export const getUsers =createAsyncThunk(
     'users/getUsers',
     async (state, thunkAPI) => {
       try {
-        const users = axios.get(`${BASE_URL}/users`);
+        const  users = await axios.get(`${BASE_URL}/users`);
         return users
       } catch (e) {
         throw new Error(e.error)
@@ -21,8 +21,14 @@ export const getDoctors =createAsyncThunk(
     'users/getDoctors',
     async (state, thunkAPI) => {
       try {
-        const users = axios.get(`${BASE_URL}/users`);
-        const doctors =users.filter(user=> user.isDoctor)
+        const { data } = await axios.get(`${BASE_URL}/users`,{
+          headers:{
+            authorization:JSON.parse(localStorage.getItem("appt-app-user")).token
+                 }
+        });
+      
+        const doctors = data.filter(user=> user.isDoctor)
+        //alert(doctors)
         return doctors
       } catch (e) {
         throw new Error(e.error)
