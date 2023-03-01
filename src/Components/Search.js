@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 const Search = () =>{
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState("")
   const navigate = useNavigate;
   return (
     <Box component="form"
