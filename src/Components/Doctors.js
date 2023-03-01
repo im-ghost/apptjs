@@ -1,7 +1,7 @@
 import Doctor from "./Doctor"
 
 
-export default function Doctors({doctors}) {
+const  Doctors = ({doctors}) => {
   return (
     <div className="flex space-x-8 justify-items-stretch">
      {
@@ -10,3 +10,4 @@ export default function Doctors({doctors}) {
     </div>
     )
 }
+export default Doctors

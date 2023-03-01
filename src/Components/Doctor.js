@@ -6,7 +6,7 @@ import {
 import { Link , BrowserRouter as Router } from "react-router-dom"
 
 
-export default function Doctor({doctor}){
+const Doctor = ({doctor}) =>{
   return(
     <div className="shadow-3xl rounded-xl ">
      <Router>
@@ -23,3 +23,4 @@ export default function Doctor({doctor}){
     </div>
     )
 }
+export default Doctor

@@ -6,16 +6,24 @@ import {
   Card,
   Typography
 } from "@mui/material"
-export default function Specialties({specialties}) {
+const Specialties = ({specialties})=>{
   return(
-   specialties.map(spec =>( <Card className="">
+   <>
+   {
+   specialties.map(spec =>
+   ( <Card className="">
    <Router>
-   <Link to={`${spec._id}`}>
     <Typography variant="h5">
+   <Link to={`${spec._id}`}>
      {spec.name}
-    </Typography>
    </Link>
+    </Typography>
    </Router>
-   </Card>))
+   </Card>)
+   )
+     
+   }
+   </>
     )
 }
+export default Specialties
