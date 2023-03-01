@@ -18,7 +18,7 @@ export const getUsers =createAsyncThunk(
 })
 
 export const getDoctors =createAsyncThunk(
-    'users/getUsers',
+    'users/getDoctors',
     async (state, thunkAPI) => {
       try {
         const users = axios.get(`${BASE_URL}/users`);
