@@ -24,9 +24,9 @@ import Doctors from "../Components/Doctors"
 import Specialties from "../Components/Specialties"
 
 const Home = () =>{
-  const [name,setName] = useState(null)
+  const [name,setName] = useState("")
   const [greeting,setGreeting] = useState("")
-  const [err,setError]= useState(null)
+  const [err,setError]= useState("")
   const [docs,setDoctors] = useState([])
   const [specialties,setSpecialities] = useState([])
   const dispatch = useDispatch();
@@ -46,11 +46,11 @@ const Home = () =>{
     dispatch(getDoctors())
   },[dispatch])
   useEffect(()=>{
-    if(user.name){
+    if(user !== null){
       setName(user.name.split()[1])
       setGreeting(great(name))
-    }else if(!user){
-      navigate("/authenticate")
+    }else{
+     navigate("/authenticate")
     }
   },[user,name, navigate])
   useEffect(()=>{
@@ -80,10 +80,10 @@ const Home = () =>{
       <Search />
     </Box>
     <Box className="">
-      {docs.length > 0 ? <Doctors doctors={docs} /> : (<Typography variant="h3">No doctors available</Typography>)}
+      {docs.length > 0 ? <Doctors doctors={docs} /> : (<Typography variant="h5">No doctors available</Typography>)}
     </Box>
     <Box className="">
-      {specialties.length > 0 ? <Specialties specialties={specialties} /> : (<Typography variant="h3">No Specialty available</Typography>)}
+      {specialties.length > 0 ? <Specialties specialties={specialties} /> : (<Typography variant="h5">No Specialty available</Typography>)}
     </Box>
     <Box className="">{err}</Box>
     
