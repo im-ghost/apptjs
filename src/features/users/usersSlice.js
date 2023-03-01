@@ -14,7 +14,7 @@ import {
 const getUsr = () =>{
   const user = localStorage.getItem("appt-app-user");
   if(user !== null){
-    return user
+    return JSON.parse(user)
   }
   return null
 }
@@ -24,7 +24,8 @@ const initialState= {
   userById:null,
   loading: 'idle',
   error:null,
-  isSuccessful :false
+  isSuccessful :false,
+  doctors:[]
 }/*
 const fetchUserById = createAsyncThunk(
     'users/fetchByIdStatus',
@@ -80,7 +81,8 @@ export const userSlice = createSlice({
         if (
           state.loading === 'pending'
         ) {
-          state.loading = 'idle'
+          state.loading = 'idle';
+          
           state.doctors = payload
           
         }
