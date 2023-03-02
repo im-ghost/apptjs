@@ -1,106 +1,113 @@
+import axios from "axios"
+import {
+  createAsyncThunk
+ } from '@reduxjs/toolkit';
+const BASE_URL = "http://localhost:5000/api/appointments";
 
-import { api } from "../../app/hooks"
-//import { useSelector } from "react-redux"
-const BASE_URL = "http://localhost:5000/api";
-const fetchAppointments = async ()=>{
-  
-    const authToken= localStorage.getItem("appt-app-user")
-    if(typeof(authToken) === "string"){
-    const user = JSON.parse(authToken)
-    const appointments =   await api.get(`${BASE_URL}/appointments/`,user.token)
-    return appointments
- }
-    else{
-      throw new Error("not authorized ")
-    }
-}
-
-const delAppointment = async (id)=>{
-    
-    const authToken = localStorage.getItem("appt-app-user")
-    if(typeof(authToken) === "string"){
-    const user = JSON.parse(authToken)
-      await api.delete(`${BASE_URL}/users/user/${id}`,
-        id,
-        user.token
-      )
-    return {
-      status:200,
-      message:"Appointment deleted"
-    }
-    }
-    else{
-      throw new Error("not authorized ")
-    }
-}
-
-const fetchDoctorAppointment = async (id)=>{
-     
-    const authToken = localStorage.getItem("appt-app-user")
-    if(typeof(authToken) === "string"){
-    const user = JSON.parse(authToken)
-       const doctor = await api.delete(`${BASE_URL}/users/user/${id}`, id,user.token)
-    return doctor.appointments
-    }
-    else{
-      throw new Error("not authorized ")
-    }
-  
-}
-
-const fetchUserAppointment = async (id)=>{
-  
-    const authToken = localStorage.getItem("appt-app-user")
-    if(typeof(authToken) === "string"){
-  const user:USER = JSON.parse(authToken)
-       const { appointments } = await api.delete<USER>(`${BASE_URL}/users/user/${id}`, id,user.token)
-    return appointments
-    }
-    else{
-      throw new Error("not authorized ")
-    }
-  
-}
-
-const updateAppointment = async ({id, appointment}:{id:string, appointment: APPOINTMENT})=>{
-   const body ={
-   body:{
-    id:id,
-    appointment: appointment 
-   }
+const {  token } = JSON.parse(localStorage.getItem("appt-app-user"))
+export const fetchAppointment = createAsyncThunk(
+  'appointment/fetchAppointment',
+  async (id) => {
+    try {
+        const appointment = await axios.get(`${BASE_URL}/appointment/${id}`,{
+          headers:{
+            authorization: token
+          }
+        });
+        return appointment
+      } catch (e) {
+        throw new Error(e.error)
+      }
   }
-    const authToken:AUTHTOKEN = localStorage.getItem("appt-app-user")
-    if(typeof(authToken) === "string"){
-   const user:USER = JSON.parse(authToken)
-   const appt = await api.put<APPOINTMENT>(`${BASE_URL}/appointments/appointment/${id}`,body,user.token)
-}
-    else{
-      throw new Error("not authorized ")
-    }
-}
-
-const fetchAppointment = async (id:any)=>{
-    
-    const authToken:AUTHTOKEN = localStorage.getItem("appt-app-user")
-    if(typeof(authToken) === "string"){
-  const user : USER= JSON.parse(authToken)
-   const appt = await api.get<APPOINTMENT>(`${BASE_URL}/appointments/appointment/${id}`,user.token )
-}
-    else{
-      throw new Error("not authorized ")
-    }
-}
-
-
-
-
-
-
-export {
-  fetchAppointment,
-  fetchUserAppointment,
-  fetchDoctorAppointment,
-  fetchAppointments,
-  delAppointment,
-  updateAppointment 
-} 
+);
+export const fetchAppointments = createAsyncThunk(
+  'appointment/fetchAppointments',
+  async () => {
+     try {
+        const appointments = await axios.get(`${BASE_URL}/`,{
+          headers:{
+            authorization: token
+          }
+        });
+        return appointments
+      } catch (e) {
+        throw new Error(e.error)
+      }
+  }
+);
+export const fetchDoctorAppointments = createAsyncThunk(
+  'appointment/fetchDoctorAppointments',
+  async (id) => {
+    try {
+        const appointments = await axios.get(`${BASE_URL}/doctor/${id}`,{
+          headers:{
+            authorization: token
+          }
+        });
+        return appointments
+      } catch (e) {
+        throw new Error(e.error)
+      }
+  }
+);
+export const fetchUserAppointments = createAsyncThunk(
+  'appointment/fetchUserAppointments',
+  async (id) => {
+     try {
+        const appointments = await axios.get(`${BASE_URL}/user/${id}`,{
+          headers:{
+            authorization: token
+          }
+        });
+        return appointments
+      } catch (e) {
+        throw new Error(e.error)
+      }
+  }
+);
+export const doctorTimeSlots = createAsyncThunk(
+  'appointment/doctorTimeSlots',
+  async (id) => {
+     try {
+        const slots = await axios.get(`${BASE_URL}/slots/${id}`,{
+          headers:{
+            authorization: token
+          }
+        });
+        return slots
+      } catch (e) {
+        throw new Error(e.error)
+      }
+  }
+);
+export const createAppointment = createAsyncThunk(
+  'appointment/createAppointment',
+  async (id,body) => {
+     try {
+        const appointment = await axios.post(`${BASE_URL}`,{
+          headers:{
+            authorization: token
+          },
+          body: body 
+        });
+        return appointment
+      } catch (e) {
+        throw new Error(e.error)
+      }
+  }
+);
+export const cancelAppointment = createAsyncThunk(
+  'appointment/cancelAppointment',
+  async (id) => {
+     try {
+        await axios.delete(`${BASE_URL}/appointment/${id}`,{
+          headers:{
+            authorization: token
+          }
+        });
+        return "Done"
+      } catch (e) {
+        throw new Error(e.error)
+      }
+  }
+);
