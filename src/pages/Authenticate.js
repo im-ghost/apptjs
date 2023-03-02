@@ -4,9 +4,7 @@ import {
 import {
   useNavigate
 } from "react-router-dom"
-import {
-  useEffect
-} from "react"
+
 const Authenticate = () =>{
   const navigate = useNavigate()
   return(
