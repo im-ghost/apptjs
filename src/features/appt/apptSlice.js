@@ -13,12 +13,13 @@ import {
 
 
 const initialState = {
-  status: 'idle',
+  loading: 'idle',
   appointments: [],
   appointment: null,
   timeSlots : [],
   userAppointments:[],
-  doctorsAppointments :[]
+  doctorsAppointments :[],
+  isSuccessful:false,
 }
 
 export const apptSlice = createSlice({
