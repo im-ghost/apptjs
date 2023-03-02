@@ -6,9 +6,7 @@ import React,{
   
 } from "react"
 import  {
-  useNavigate,
-  Link,
-  BrowserRouter as Router
+  useNavigate
 } from "react-router-dom"
 
 import { regUser } from "../../features/users/usersSlice"
@@ -24,7 +22,7 @@ import {
   Button
   
 } from "@mui/material"
-const Signup =({})=>{
+const Signup =()=>{
  
  const [err,setError] = useState("")
   const dispatch = useDispatch()
@@ -77,41 +75,48 @@ const Signup =({})=>{
           ...state,
           name:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setEmail':
         return {
           ...state,
           email:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setPassword':
         return {
           ...state,
           password:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setPassword2':
         return {
           ...state,
           password2:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setDoctor':
         return {
           ...state,
           isDoctor:!state.isDoctor
         }
+        // eslint-disable-next-line
         break;
       case 'setSpecialties':
         return {
           ...state,
           specialties:[action.payload]
         }
+        // eslint-disable-next-line
         break;
       case 'reset':
         return {
          state:initialState
         }
+        // eslint-disable-next-line
         break;
       
       default:
