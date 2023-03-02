@@ -2,32 +2,27 @@ import {
   Typography
 } from "@mui/material";
 import {
-  Link,
-  BrowserRouter as Router
+  useNavigate
 } from "react-router-dom"
 
 
 const Footer = () =>{
+  const navigate = useNavigate()
   return (
     <div className="rounded-3xl flex flex-row w-[80vw]  space-evenly  shadow-3xl absolute bottom-5 p-4 m-2 space-x-8 justify-items-stretch">
-    <Router>
-    <Typography variant="h4">
-    <Link to={`/`}>
+    <Typography variant="h4" onClick={()=> navigate("")}>
+ 
     🏠
-    </Link>
     </Typography>
-    <Typography variant="h4">
-   <Link to={`/appointments`}>
+    <Typography variant="h4" onClick={()=> navigate("")}>
+ 
     📅
-   </Link> 
     </Typography>
   
-    <Typography variant="h4">
-    <Link to={`auth/profile`}>
+    <Typography variant="h4" onClick={()=> navigate("")}>
     🙎
-    </Link>
+  
     </Typography>
-    </Router>
    
     </div>
     
