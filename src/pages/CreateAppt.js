@@ -14,9 +14,13 @@ import {
  } from "react-redux"
 import {
   Typography,
-  TextField,
   Box,
-  Button
+  Button,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel
+ 
 } from "@mui/material"
 
 const CreateAppt =()=>{
@@ -76,7 +80,19 @@ const CreateAppt =()=>{
     {err}
     </Typography>
       <Box>
-
+      <FormControl fullWidth>
+  <InputLabel>Time Slots</InputLabel>
+  <Select
+    labelId="time slots"
+    value={time}
+    label="Age"
+    onChange={(e)=>setTime(e.target.value)}
+  >
+  {times.map(tim)=>(
+    <MenuItem value={tim}>{tim}</MenuItem>
+    )}
+  </Select>
+</FormControl>
      <Button type='submit' onClick={create} className="sign__button">
      <Typography variant="h5">
      Create
