@@ -6,7 +6,7 @@ import Header from "./Components/Header"
 //
 import SearchResults from "./pages/SearchResults"
 import Home from "./pages/Home"
-//import Footer from "./Components/Footer"
+import Footer from "./Components/Footer"
 import Signin from "./pages/auth/Signin"
 import Signup from "./pages/auth/Signup"
 import Authenticate from "./pages/Authenticate"
@@ -16,6 +16,7 @@ import {
   //BrowserRouter as Router
 } from "react-router-dom";
 import ErrorPage from "./pages/Error"
+import React from "react"
 const router = createBrowserRouter([
   {
     path: "/logout",
@@ -65,11 +66,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  React.useEffect(()=>{
+    alert("hihi")
+  },[])
   return (
     <div className="p-2">
        <Header />
        <RouterProvider router={router}/>
-       {/*<Footer />*/}
+       <Footer />
     </div>
   );
 }
