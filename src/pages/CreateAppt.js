@@ -35,7 +35,10 @@ const CreateAppt =()=>{
   )
   const {
     doctorTimeSlots,
-    timeSlots
+    timeSlots,
+    createAppointment,
+    isSuccessful,
+    error
   } = useSelector(state=>state.appt)
   useEffect(() => {
     if (error) {
