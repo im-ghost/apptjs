@@ -20,6 +20,7 @@ const initialState = {
   userAppointments:[],
   doctorsAppointments :[],
   isSuccessful:false,
+  error:null
 }
 
 export const apptSlice = createSlice({
