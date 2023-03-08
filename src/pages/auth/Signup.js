@@ -1,14 +1,10 @@
-
 import React,{
   useEffect,
   useReducer,
-  useState,
-  
+  useState
 } from "react"
 import  {
-  useNavigate,
-  Link,
-  BrowserRouter as Router
+  useNavigate
 } from "react-router-dom"
 
 import { regUser } from "../../features/users/usersSlice"
@@ -24,7 +20,7 @@ import {
   Button
   
 } from "@mui/material"
-const Signup =({})=>{
+const Signup =()=>{
  
  const [err,setError] = useState("")
   const dispatch = useDispatch()
@@ -36,27 +32,25 @@ const Signup =({})=>{
     password:"",
     password2:"",
     isDoctor:false,
-    specialties:[]
+    specialties:[],
+    availability:[]
   }
   
 
   const { user, error, isSuccess,  } = useSelector(
     (state) => state.users
   )
-// alert("38")
   useEffect(() => {
     if (error) {
-
+      console.log(error)
       setError(error.message)
     }
 
     if (isSuccess) {
       navigate('/')
     }
-
     //dispatch(reset())
   }, [navigate,error, isSuccess,user])
-  // alert("50")
   const create = async (e)=>{
     e.preventDefault();
    const data = {
@@ -64,7 +58,8 @@ const Signup =({})=>{
      email:state.email,
      password:state.password,
      isDoctor:state.isDoctor,
-     specialties:state.specialties
+     specialties:state.specialties,
+     availability:state.availability
    }
    await dispatch(regUser(data))
   
@@ -77,41 +72,56 @@ const Signup =({})=>{
           ...state,
           name:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setEmail':
         return {
           ...state,
           email:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setPassword':
         return {
           ...state,
           password:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setPassword2':
         return {
           ...state,
           password2:action.payload
         }
+        // eslint-disable-next-line
         break;
       case 'setDoctor':
         return {
           ...state,
           isDoctor:!state.isDoctor
         }
+        // eslint-disable-next-line
         break;
       case 'setSpecialties':
         return {
           ...state,
           specialties:[action.payload]
         }
+        // eslint-disable-next-line
+        break;
+      case 'setAvailability':
+       
+        return {
+          ...state,
+           availability:[action.payload]
+        }
+        // eslint-disable-next-line
         break;
       case 'reset':
         return {
          state:initialState
         }
+        // eslint-disable-next-line
         break;
       
       default:
@@ -233,6 +243,8 @@ const Signup =({})=>{
     
      }}
      />
+     { state.isDoctor ? (
+     <>
     <TextField
     id="specialties"
     label="specialties"
@@ -250,6 +262,27 @@ const Signup =({})=>{
     
      }}
      />
+     
+    <TextField
+    id="specialties"
+    label="Available days of the week"
+    placeholder="Monday-9-16, Tuesday-8-20"
+    className="signin__form--input" 
+     InputProps={{
+     value:state.specialties,
+     type:"text",
+     onChange:(e)=>{
+       setState({
+       type:"setAvailability",
+       payload:e.target.value
+       })
+     },
+    
+     }}
+     />
+     </>
+     
+     ) :""}
     
      <Button type='submit' onClick={create} className="sign__button">
      <Typography variant="h5">
