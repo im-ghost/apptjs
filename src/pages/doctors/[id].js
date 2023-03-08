@@ -1,13 +1,13 @@
+/*
 import {
   Typography
 } from "@mui/material";
 import {
-  getDoctorById
+  getDoctors
 } from "../../features/users/usersSlice"
 import {
-  Link,
-  BrowserRouter as Router,
-  useNavigate
+  useNavigate,
+  useParams
 } from "react-router-dom"
 import {
   useSelector,
@@ -18,6 +18,33 @@ import {
   useEffect
 } from "react"
 const Doctor = () =>{
-  return()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const [doc,setDoctor] = useState(null)
+  const {
+    user,
+    doctors 
+  } = useSelector((state)=>state.user)
+  const {
+    isSuccessful
+  } = useSelector((state)=>state.appt)
+  useLayoutEffect(()=>{
+    dispatch(getDoctors())
+  },[dispatch])
+  useEffect(()=>{
+    if(isSuccessful){
+      const doctor = doctors.find(doc=>doc._id === id)
+      if(doctor !== undefined) setDoctor(doctor)
+      else navigate("/")
+    } 
+  },[isSuccessful, doctors])
+  return(
+    <div>
+     <Typography variant="h3">{doc.name}</Typography>
+     <button onClick={()=>navigate(`/create/${doc_id}`
+    </div>
+    )
 }
 export default Doctor
+*/
