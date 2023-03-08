@@ -6,7 +6,7 @@ import {
   Typography
 } from "@mui/material"
 const Specialties = ({specialties})=>{
-  alert(specialties)
+  console.log(specialties)
   const navigate = useNavigate()
   return(
    <div>

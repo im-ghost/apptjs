@@ -1,5 +1,3 @@
-// useLoaderData that where the id is
-// alao a redirect
 import './App.css';
 import Logout from "./Components/Logout"
 import Header from "./Components/Header"
@@ -16,6 +14,10 @@ import {
   //BrowserRouter as Router
 } from "react-router-dom";
 import ErrorPage from "./pages/Error"
+import eruda from "eruda"
+import React,{
+  useEffect
+} from "react"
 const router = createBrowserRouter([
   {
     path: "/logout",
@@ -65,11 +67,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(()=>{
+    alert("hi")
+    eruda.init();
+  },[])
   return (
     <div className="p-2">
        <Header />
        <RouterProvider router={router}/>
-       {/*<Footer />*/}
+      {/* <Footer />*/}
     </div>
   );
 }

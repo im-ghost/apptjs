@@ -4,11 +4,9 @@ import {
  } from "react-router-dom";
 import { Paper, Typography} from "@mui/material"
 export default function ErrorPage() {
-  alert("error")
   const error = useRouteError();
   const navigate = useNavigate()
   console.error(error);
-alert(error)
   return (
     <div id="error-page" className="h-screen w-screen flex justify-center align-center text-center">
     <Paper className="h-1/2 w-4/5 rounded-xl shadow-3xl">
